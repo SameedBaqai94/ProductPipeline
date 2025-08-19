@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 const SALT = 10;
+
 interface UserServiceInterface {
     response?: string | UserReadDto;
     error?: string;

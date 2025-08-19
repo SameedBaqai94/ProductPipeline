@@ -1,3 +1,5 @@
+import { ItemDto } from "./Item";
+
 export interface User {
     id: number;
     email: string;
@@ -5,6 +7,7 @@ export interface User {
     passwordHashed: string;
     createdAt: Date;
     updatedAt: Date;
+    items?: ItemDto[];
 }
 
 export interface UserWriteDto {
@@ -16,6 +19,7 @@ export interface UserWriteDto {
 export interface UserReadDto {
     email: string;
     name: string;
+    items?: ItemDto[];
 }
 
 export interface LoginDto {

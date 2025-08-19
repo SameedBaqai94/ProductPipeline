@@ -21,4 +21,14 @@ model User{
   passwordHashed String @map("password_hashed")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  items     Item[]
+}
+
+model Item {
+  id     Int    @id @default(autoincrement())
+  title  String
+  link   String
+  price  Float
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
 }
