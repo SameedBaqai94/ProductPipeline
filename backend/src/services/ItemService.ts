@@ -43,7 +43,31 @@ export const getAItemService = async (): Promise<ItemServiceInterface> => {
         return { error: "error" }
     }
 }
+
+export const getItemsByUserService = async (userId: number): Promise<ItemServiceInterface> => {
+    try {
+        if (!await prisma.user.findUnique({ where: { id: userId } })) {
+            return { error: "user not found" }
+        }
+
+        const items = await prisma.item.findMany({
+            where: {
+                userId: userId
+            }
+        })
+
+        const itemsMap = items.map(item => ({
+            title: item.title,
+            link: item.link,
+            price: item.price
+        }));
+        return { response: itemsMap }
+
+    } catch (e) {
+        return { error: "error" }
+    }
+}
+
 const checkItemExist = async (title: string) => {
     return await prisma.item.findFirst({ where: { title: title } }) ? true : false;
-
 }
