@@ -1,6 +1,9 @@
 import type { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import type { LoginDto, UserWriteDto } from "../models/User";
 import { registerUserService, signInUserService } from "../services/UserService";
+
+const secret_key = process.env.JWT_SECRET_KEY || "YOUR_SECRET_KEY";
 
 export const registerUserController = async (req: Request<{}, {}, UserWriteDto>, res: Response) => {
     const { email, name, passwordHashed } = { ...req.body };
@@ -25,5 +28,14 @@ export const signInController = async (req: Request<{}, {}, LoginDto>, res: Resp
     if (user.error) {
         return res.status(400).json(user.error)
     }
-    return res.status(201).json(user.response)
+    if (user.response) {
+        const payload = {
+            id: user.response.id,
+            email: user.response.email,
+        }
+        const token = jwt.sign(payload, secret_key, {
+            expiresIn: '1hr'
+        })
+        return res.status(201).json({ token: token })
+    }
 }

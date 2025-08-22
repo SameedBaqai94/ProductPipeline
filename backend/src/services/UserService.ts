@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const SALT = 10;
 
 interface UserServiceInterface {
-    response?: string | UserReadDto;
+    response?: UserReadDto;
     error?: string;
 }
 
@@ -22,7 +22,7 @@ export const registerUserService = async (user: UserWriteDto): Promise<UserServi
                 passwordHashed: await bcrypt.hash(user.passwordHashed, SALT)
             }
         });
-        return { response: { email: newUser.email, name: newUser.name } }
+        return { response: { id: newUser.id, email: newUser.email, name: newUser.name } };
 
     } catch (e) {
         return { error: "Resgisteration error" }
@@ -43,7 +43,7 @@ export const signInUserService = async (user: LoginDto): Promise<UserServiceInte
         if (!await bcrypt.compare(user.passwordHashed, getUser.passwordHashed)) {
             return { error: "Invalid password!" }
         }
-        return { response: { email: getUser.email, name: getUser.name } }
+        return { response: { id: getUser.id, email: getUser.email, name: getUser.name } };
 
     } catch (e) {
         return { error: "Sign In error" }

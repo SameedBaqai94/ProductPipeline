@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ItemWriteDto } from "../models/Item";
 import { addItemService, getAItemService, getItemsByUserService } from "../services/ItemService";
+import { AuthRequest } from "../middleware/authMiddleware";
 
 export const addItemController = async (req: Request<{}, {}, ItemWriteDto>, res: Response) => {
     const { title, link, price, userId } = { ...req.body };
@@ -25,12 +26,18 @@ export const getAllItemController = async (req: Request, res: Response) => {
     return res.status(201).json(items.response)
 }
 
-export const getItemsByUserController = async (req: Request<{ userId: number }>, res: Response) => {
-    const userId = req.params.userId;
-    console.log(userId);
+export const getItemsByUserController = async (req: AuthRequest, res: Response) => {
+    const userId = req.userId;
+
     const items = await getItemsByUserService(Number(userId));
     if (items.error) {
         return res.status(400).json(items.error)
     }
     return res.status(201).json(items.response)
+}
+
+//DELETE
+export const deleteItemController = async (req: AuthRequest, res: Response) => {
+    const userId = req.userId;
+
 }

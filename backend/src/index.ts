@@ -1,6 +1,8 @@
 import express from 'express';
 import userRoute from "./routes/UserRoute";
 import itemRoute from "./routes/ItemRoute";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const PORT = 8080;
