@@ -18,10 +18,11 @@ export const addItemService = async (item: ItemWriteDto): Promise<ItemServiceInt
                 title: item.title,
                 link: item.link,
                 price: item.price,
+                status: item.status,
                 userId: item.userId
             }
         });
-        return { response: { title: newItem.title, link: newItem.link, price: newItem.price } }
+        return { response: { title: newItem.title, link: newItem.link, price: newItem.price, status: item.status } }
 
     } catch (e) {
         return { error: "Adding item error" }
@@ -35,7 +36,8 @@ export const getAItemService = async (): Promise<ItemServiceInterface> => {
         const itemsMap = items.map(item => ({
             title: item.title,
             link: item.link,
-            price: item.price
+            price: item.price,
+            status: item.status
         }));
         return { response: itemsMap }
 
@@ -59,7 +61,8 @@ export const getItemsByUserService = async (userId: number): Promise<ItemService
         const itemsMap = items.map(item => ({
             title: item.title,
             link: item.link,
-            price: item.price
+            price: item.price,
+            status: item.status
         }));
         return { response: itemsMap }
 

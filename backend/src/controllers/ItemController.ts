@@ -4,12 +4,12 @@ import { addItemService, getAItemService, getItemsByUserService } from "../servi
 import { AuthRequest } from "../middleware/authMiddleware";
 
 export const addItemController = async (req: Request<{}, {}, ItemWriteDto>, res: Response) => {
-    const { title, link, price, userId } = { ...req.body };
+    const { title, link, price, userId, status } = { ...req.body };
 
     if (!title || !link || !price || !userId) {
         return res.status(400).json({ error: "Missing required fields" })
     }
-    const newItem = await addItemService({ title, link, price, userId });
+    const newItem = await addItemService({ title, link, price, userId, status });
     if (newItem.error) {
         return res.status(400).json(newItem.error)
     }
