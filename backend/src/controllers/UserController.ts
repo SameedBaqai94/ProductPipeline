@@ -32,10 +32,23 @@ export const signInController = async (req: Request<{}, {}, LoginDto>, res: Resp
         const payload = {
             id: user.response.id,
             email: user.response.email,
-        }
+        };
+
         const token = jwt.sign(payload, secret_key, {
             expiresIn: '1hr'
+        });
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: "strict",
+            maxAge: 60 * 60 * 1000
         })
-        return res.status(201).json({ token: token })
+        return res.status(201).json({
+            user: {
+                id: user.response.id,
+                email: user.response.email,
+                name: user.response.name
+            }
+        })
     }
 }

@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import HomePage from './pages/HomePage'
+import Login from './pages/auth/Login'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <HomePage />
+    <Login />
   </StrictMode>,
 )
