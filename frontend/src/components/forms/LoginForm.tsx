@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "../ui/Button";
-import Input from "../ui/Input";
 import useAuth from "../../hooks/useAuth";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 
 interface LoginFormInterface {
     email: string;
@@ -9,7 +9,8 @@ interface LoginFormInterface {
 }
 
 export default function LoginForm() {
-    const { login, user } = useAuth();
+    const auth = useAuth();
+    const login = auth?.login;
     const [loginObj, setLoginObj] = useState<LoginFormInterface>({
         email: "",
         passwordHashed: ""
@@ -27,12 +28,15 @@ export default function LoginForm() {
             ...prev,
             passwordHashed: e.target.value
         }));
-
     }
+
     const submitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await login(loginObj)
+        if (login) {
+            await login(loginObj);
+        }
     }
+
 
     return (
         <form onSubmit={submitEvent}>
