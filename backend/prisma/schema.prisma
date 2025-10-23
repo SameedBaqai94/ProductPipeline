@@ -14,29 +14,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ItemStatus {
-  Wishlist
-  Researching
-  ReadyToBuy
-  Bought
-}
-
-model User{
-  id Int @id @default(autoincrement())
-  email String @unique
-  name String
-  passwordHashed String @map("password_hashed")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  items     Item[]
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255) @unique
+  email          String   @db.VarChar(255) @unique
+  passwordHashed String   @map("password_hashed")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  items          Item[]
+  @@map("users")
 }
 
 model Item {
-  id     Int    @id @default(autoincrement())
-  title  String
-  link   String
-  price  Float
-  status ItemStatus @default(Wishlist)
-  userId Int
-  user   User   @relation(fields: [userId], references: [id])
+  id            Int      @id @default(autoincrement())
+  title         String   @unique
+  description   String
+  link          String
+  image         String
+  price         Int
+  status        String
+  datePublished DateTime @default(now()) @map("date_published")
+  
+  userId        Int      @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("items")
 }

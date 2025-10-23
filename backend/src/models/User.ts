@@ -1,29 +1,29 @@
-import { ItemReadDto } from "./Item";
+import { itemRead } from "./Items.js";
 
-export interface User {
+interface User {
     id: number;
-    email: string;
     name: string;
-    passwordHashed: string;
-    createdAt: Date;
-    updatedAt: Date;
-    items?: ItemReadDto[];
+    email: string;
+    passswordHashed: string;
+    createdDate: Date;
+    updateDate: Date;
+    items?: itemRead[];
 }
 
-export interface UserWriteDto {
-    email: string;
+export interface userWrite {
     name: string;
+    email: string;
     passwordHashed: string;
 }
 
-export interface UserReadDto {
+export interface userRead {
     id: number;
-    email: string;
     name: string;
-    items?: ItemReadDto[];
+    email: string;
+    items?: itemRead[];
 }
 
-export interface LoginDto {
+export interface signIn {
     email: string;
     passwordHashed: string;
 }
