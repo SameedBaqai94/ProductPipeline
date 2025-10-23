@@ -12,6 +12,10 @@ export const userSignInController = async (req: Request<{}, {}, signIn>, res: Re
     if (user.error) {
         return res.status(401).json({ status: user.error });
     }
+    res.cookie("tokenCookie", JSON.stringify(user.message), {
+        secure: process.env.NODE_ENV !== 'development',
+        httpOnly: true
+    })
     return res.status(200).json({ status: user.message });
 }
 
