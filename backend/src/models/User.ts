@@ -1,29 +1,37 @@
-import { itemRead } from "./Items.js";
-
-interface User {
-    id: number;
-    name: string;
+// User Entity Interface
+export interface User {
+    id: string;
     email: string;
-    passswordHashed: string;
-    createdDate: Date;
-    updateDate: Date;
-    items?: itemRead[];
+    password: string;
+    firstName: string;
+    lastName: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
-export interface userWrite {
-    name: string;
+// Register DTO
+export interface RegisterDTO {
     email: string;
-    passwordHashed: string;
+    password: string;
+    firstName: string;
+    lastName: string;
 }
 
-export interface userRead {
-    id: number;
-    name: string;
+// Login DTO
+export interface LoginDTO {
     email: string;
-    items?: itemRead[];
+    password: string;
 }
 
-export interface signIn {
-    email: string;
-    passwordHashed: string;
+// Auth Response DTO
+export interface AuthResponseDTO {
+    success: boolean;
+    message: string;
+    token?: string;
+    user?: {
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+    };
 }

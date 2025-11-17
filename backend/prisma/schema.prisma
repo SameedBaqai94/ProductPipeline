@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -15,28 +15,11 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  name           String   @db.VarChar(255) @unique
-  email          String   @db.VarChar(255) @unique
-  passwordHashed String   @map("password_hashed")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-  items          Item[]
-  @@map("users")
-}
-
-model Item {
-  id            Int      @id @default(autoincrement())
-  title         String   @unique
-  description   String
-  link          String
-  image         String
-  price         Int
-  status        String
-  datePublished DateTime @default(now()) @map("date_published")
-  
-  userId        Int      @map("user_id")
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  @@map("items")
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

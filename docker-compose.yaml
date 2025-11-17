@@ -10,29 +10,17 @@ services:
     env_file:
       - ./backend/.env
   db:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: purchasepipelinedb
+      POSTGRES_DB: ppdb
     ports:
       - "5432:5432"
     env_file:
       - ./backend/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
 
 volumes:
   postgres_data:
