@@ -22,4 +22,20 @@ model User {
   lastName  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  items     Item[]
 }
+
+model Item {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  link        String
+  image       String
+  price       Float
+  status      String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
