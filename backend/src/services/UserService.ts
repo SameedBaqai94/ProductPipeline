@@ -67,7 +67,7 @@ export const userSignInService = async (user: LoginDTO): Promise<AuthResponseDTO
         };
         return {
             success: true,
-            message: 'User registered successfully',
+            message: 'User signin successfully',
             user: {
                 id: currentUser.id,
                 email: currentUser.email,
