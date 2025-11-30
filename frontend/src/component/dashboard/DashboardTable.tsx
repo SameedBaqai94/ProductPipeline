@@ -39,6 +39,7 @@ export const DashboardTable: React.FC = () => {
 
     }, []);
 
+
     const planningItems = items.length > 0 ? items.filter(item => item.status === 'planning') : [];
     const inProgressItems = items.length > 0 ? items.filter(item => item.status === 'in progress') : [];
     const finishedItems = items.length > 0 ? items.filter(item => item.status === 'finished') : [];

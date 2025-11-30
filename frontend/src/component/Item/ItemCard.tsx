@@ -4,6 +4,7 @@ import type { ItemDto } from '../../models/Item';
 interface ItemCardInterface {
     item: ItemDto;
 }
+
 export const ItemCard = (props: ItemCardInterface) => {
     return (
         <Box
@@ -25,7 +26,7 @@ export const ItemCard = (props: ItemCardInterface) => {
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Heading size="md">Item Title</Heading>
                         <Badge colorScheme="green" fontSize="sm">
-                            {props.item?.status}
+                            {props.item.status}
                         </Badge>
                     </Box>
 

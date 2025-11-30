@@ -3,7 +3,8 @@ import { Input } from "../common/InputComponent";
 import { Button } from "../common/ButtonComponent";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// Create a collection from your options
+
+
 const statusCollection = createListCollection({
     items: [
         { label: "Planning", value: "planning" },
@@ -49,10 +50,7 @@ export const ItemForm: React.FC = () => {
             const responseData = await response.json();
             navigate("/dashboard");
 
-            // TODO: Handle success (maybe clear form or show message)
-
         } catch (e) {
-            // TODO: Handle error properly
             console.error(e);
         }
     }
