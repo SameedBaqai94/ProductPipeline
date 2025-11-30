@@ -46,8 +46,6 @@ export const ItemForm: React.FC = () => {
             if (!response.ok) {
                 throw new Error("error adding item");
             }
-
-            const responseData = await response.json();
             navigate("/dashboard");
 
         } catch (e) {
