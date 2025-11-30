@@ -1,6 +1,10 @@
 import { Box, Image, Heading, Text, Badge, Stack } from '@chakra-ui/react';
+import type { ItemDto } from '../../models/Item';
 
-export const ItemCard: React.FC = () => {
+interface ItemCardInterface {
+    item: ItemDto;
+}
+export const ItemCard = (props: ItemCardInterface) => {
     return (
         <Box
             maxW="sm"
@@ -10,27 +14,27 @@ export const ItemCard: React.FC = () => {
             bg="white"
         >
             <Image
-                src="https://via.placeholder.com/400x200"
+                src={props.item.image}
                 alt="Item image"
                 h="200px"
                 w="100%"
                 objectFit="cover"
             />
             <Box p={4}>
-                <Stack spacing={3}>
+                <Stack >
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Heading size="md">Item Title</Heading>
                         <Badge colorScheme="green" fontSize="sm">
-                            Active
+                            {props.item?.status}
                         </Badge>
                     </Box>
 
                     <Text color="gray.600">
-                        Item description goes here. This is a placeholder text for the item description.
+                        {props.item.description}
                     </Text>
 
                     <Text color="blue.600" fontSize="2xl" fontWeight="bold">
-                        $99.99
+                        ${props.item.price}
                     </Text>
                 </Stack>
             </Box>

@@ -30,6 +30,11 @@ export const NavBarComponent: React.FC = () => {
                             </ReactRouterLink>
                         </ChakraLink>
                         <ChakraLink asChild>
+                            <ReactRouterLink to="/itemform">
+                                Add Item
+                            </ReactRouterLink>
+                        </ChakraLink>
+                        <ChakraLink asChild>
                             <ReactRouterLink to="/dashboard">
                                 Dashboard
                             </ReactRouterLink>
